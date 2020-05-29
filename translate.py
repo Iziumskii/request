@@ -15,18 +15,18 @@ def save_translate(path, text):
         f.write(text)
 
 
-def translate_it(rpath, wpath, lang):
-
+def translate_it(rpath, wpath, from_lang, to_lang='ru'):
     params = {
         'key': API_KEY,
         'text': read_text(rpath),
-        'lang': lang,
+        'lang': '{}-{}'.format(from_lang, to_lang),
     }
 
     response = requests.get(URL, params=params)
     json_ = response.json()
-    resalt =  ''.join(json_['text'])
+    resalt = ''.join(json_['text'])
     save_translate(wpath, resalt)
 
+
 if __name__ == '__main__':
-    translate_it('DE.txt', 'DE-RU.txt', 'de-ru')
+    translate_it('DE.txt', 'DE-RU.txt', 'de')

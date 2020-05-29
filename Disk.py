@@ -21,13 +21,9 @@ def url_it(path):
 def upload(path):
     url_1 = url_it(path)
 
-    params = {
-        'path': path,
-        # 'fields': fields,
-    }
-
-    response = requests.put(url_1, params=params)
-    print(response)
+    with open(path, encoding='utf8') as file:
+        response = requests.put(url_1, files={'file': file})
+        print(response)
 
 
 upload('DE-RU.txt')
